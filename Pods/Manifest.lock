@@ -1,0 +1,16 @@
+PODS:
+  - AudioburstMobileLibrary (0.0.18)
+
+DEPENDENCIES:
+  - AudioburstMobileLibrary
+
+SPEC REPOS:
+  trunk:
+    - AudioburstMobileLibrary
+
+SPEC CHECKSUMS:
+  AudioburstMobileLibrary: b8b078598837ee242f28744de9972aa336882d02
+
+PODFILE CHECKSUM: d3c4bfaaed617f9aabbd7e27c381e89989cffd2f
+
+COCOAPODS: 1.10.1

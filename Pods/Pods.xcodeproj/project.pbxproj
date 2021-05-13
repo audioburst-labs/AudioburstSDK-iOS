@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		8201789BB5784A9998E8113F24E590D2 /* AudioburstMobileLibrary */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 642C4DB234C39CD80A72826B276F3CE7 /* Build configuration list for PBXAggregateTarget "AudioburstMobileLibrary" */;
+			buildPhases = (
+				7A1159390E836182992096792C6D9530 /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+			);
+			name = AudioburstMobileLibrary;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		7C6275FF6EE49E68290426F02D5E2AEC /* Pods-AudioburstSDK-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 661D9A30B9E59FAF2F1B0185573FE8D5 /* Pods-AudioburstSDK-ios-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		80830ED63BE44C940C9B2D51DB9DD148 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8201789BB5784A9998E8113F24E590D2;
+			remoteInfo = AudioburstMobileLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4550E580C76176C25C6CFA4B49C2AF6A /* Pods-AudioburstSDK-ios-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AudioburstSDK-ios-acknowledgements.plist"; sourceTree = "<group>"; };
+		48820148F9C1082279C0CC6048E0EC93 /* AudioburstMobileLibrary-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "AudioburstMobileLibrary-xcframeworks.sh"; sourceTree = "<group>"; };
+		4C19AB0BD8373B0728D48B196D880885 /* AudioburstMobileLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AudioburstMobileLibrary.debug.xcconfig; sourceTree = "<group>"; };
+		661D9A30B9E59FAF2F1B0185573FE8D5 /* Pods-AudioburstSDK-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AudioburstSDK-ios-dummy.m"; sourceTree = "<group>"; };
+		8058B8FB624AC82F2C45EA2CD1DC52FF /* Pods-AudioburstSDK-ios-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AudioburstSDK-ios-acknowledgements.markdown"; sourceTree = "<group>"; };
+		875C403EA10EED4B20F8C2AD52E34E7B /* Pods-AudioburstSDK-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AudioburstSDK-ios.release.xcconfig"; sourceTree = "<group>"; };
+		970D51B2997A63148F088B78A1BD5541 /* AudioburstMobileLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AudioburstMobileLibrary.h; path = "AudioburstMobileLibrary.xcframework/ios-arm64/AudioburstMobileLibrary.framework/Headers/AudioburstMobileLibrary.h"; sourceTree = "<group>"; };
+		9847E9B3E02447DABACE0EDF0F4F0AAD /* Pods-AudioburstSDK-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AudioburstSDK-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B94BAA112DEF6217C33D2D8EF140DC37 /* AudioburstMobileLibrary.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = AudioburstMobileLibrary.xcframework; sourceTree = "<group>"; };
+		BB88B2FE652685704E1D5C455C1F04C2 /* AudioburstMobileLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AudioburstMobileLibrary.h; path = "AudioburstMobileLibrary.xcframework/ios-x86_64-simulator/AudioburstMobileLibrary.framework/Headers/AudioburstMobileLibrary.h"; sourceTree = "<group>"; };
+		D90AEDCBF0ED453D33EEC8DD4C038BC7 /* AudioburstMobileLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AudioburstMobileLibrary.release.xcconfig; sourceTree = "<group>"; };
+		F2354C2C65454E249EC0734844A8DAD1 /* libPods-AudioburstSDK-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-AudioburstSDK-ios.a"; path = "libPods-AudioburstSDK-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A6EC0F9FED9408823872F8C5B444A5C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A93BCD447D3CF802E3350CAAC207ADD /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E62F25FD28A059B7EC8A6930360EF7ED /* Pods-AudioburstSDK-ios */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		10A5162BBE0FEF3D28542A61D10724C7 /* AudioburstMobileLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				970D51B2997A63148F088B78A1BD5541 /* AudioburstMobileLibrary.h */,
+				BB88B2FE652685704E1D5C455C1F04C2 /* AudioburstMobileLibrary.h */,
+				934FD14C74382929DD648CBD85E6098C /* Frameworks */,
+				761DD9EFFD730F6626DF4D276A93699A /* Support Files */,
+			);
+			name = AudioburstMobileLibrary;
+			path = AudioburstMobileLibrary;
+			sourceTree = "<group>";
+		};
+		5C1784808FBF9DAFC3F0ED6AC4440248 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2354C2C65454E249EC0734844A8DAD1 /* libPods-AudioburstSDK-ios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		761DD9EFFD730F6626DF4D276A93699A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				48820148F9C1082279C0CC6048E0EC93 /* AudioburstMobileLibrary-xcframeworks.sh */,
+				4C19AB0BD8373B0728D48B196D880885 /* AudioburstMobileLibrary.debug.xcconfig */,
+				D90AEDCBF0ED453D33EEC8DD4C038BC7 /* AudioburstMobileLibrary.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/AudioburstMobileLibrary";
+			sourceTree = "<group>";
+		};
+		934FD14C74382929DD648CBD85E6098C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B94BAA112DEF6217C33D2D8EF140DC37 /* AudioburstMobileLibrary.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				E261FE7544A80BF07C8A44A643E9394B /* Pods */,
+				5C1784808FBF9DAFC3F0ED6AC4440248 /* Products */,
+				0A93BCD447D3CF802E3350CAAC207ADD /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E261FE7544A80BF07C8A44A643E9394B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				10A5162BBE0FEF3D28542A61D10724C7 /* AudioburstMobileLibrary */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E62F25FD28A059B7EC8A6930360EF7ED /* Pods-AudioburstSDK-ios */ = {
+			isa = PBXGroup;
+			children = (
+				8058B8FB624AC82F2C45EA2CD1DC52FF /* Pods-AudioburstSDK-ios-acknowledgements.markdown */,
+				4550E580C76176C25C6CFA4B49C2AF6A /* Pods-AudioburstSDK-ios-acknowledgements.plist */,
+				661D9A30B9E59FAF2F1B0185573FE8D5 /* Pods-AudioburstSDK-ios-dummy.m */,
+				9847E9B3E02447DABACE0EDF0F4F0AAD /* Pods-AudioburstSDK-ios.debug.xcconfig */,
+				875C403EA10EED4B20F8C2AD52E34E7B /* Pods-AudioburstSDK-ios.release.xcconfig */,
+			);
+			name = "Pods-AudioburstSDK-ios";
+			path = "Target Support Files/Pods-AudioburstSDK-ios";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		10019EA3914522D201629C57146676BC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6356612B513DB934A4F9C15ED4E72BB5 /* Pods-AudioburstSDK-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A205062B3688C2B6D6BE1E1672998E87 /* Build configuration list for PBXNativeTarget "Pods-AudioburstSDK-ios" */;
+			buildPhases = (
+				10019EA3914522D201629C57146676BC /* Headers */,
+				8D3AD531E7A1ED002790423DC5766918 /* Sources */,
+				A6EC0F9FED9408823872F8C5B444A5C3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				51851195A9B03784A68F6A02A0EB9299 /* PBXTargetDependency */,
+			);
+			name = "Pods-AudioburstSDK-ios";
+			productName = "Pods-AudioburstSDK-ios";
+			productReference = F2354C2C65454E249EC0734844A8DAD1 /* libPods-AudioburstSDK-ios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 5C1784808FBF9DAFC3F0ED6AC4440248 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8201789BB5784A9998E8113F24E590D2 /* AudioburstMobileLibrary */,
+				6356612B513DB934A4F9C15ED4E72BB5 /* Pods-AudioburstSDK-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7A1159390E836182992096792C6D9530 /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/AudioburstMobileLibrary/AudioburstMobileLibrary-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/AudioburstMobileLibrary/AudioburstMobileLibrary-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/AudioburstMobileLibrary/AudioburstMobileLibrary-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D3AD531E7A1ED002790423DC5766918 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C6275FF6EE49E68290426F02D5E2AEC /* Pods-AudioburstSDK-ios-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		51851195A9B03784A68F6A02A0EB9299 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AudioburstMobileLibrary;
+			target = 8201789BB5784A9998E8113F24E590D2 /* AudioburstMobileLibrary */;
+			targetProxy = 80830ED63BE44C940C9B2D51DB9DD148 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1ADA423FE3A56F0DB52DEC3991E80BDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D90AEDCBF0ED453D33EEC8DD4C038BC7 /* AudioburstMobileLibrary.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2B9E26EAE2CD392AD762421F663075A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		8AF8ADE8A05F2EFADC58FF3E8FFF7F9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 875C403EA10EED4B20F8C2AD52E34E7B /* Pods-AudioburstSDK-ios.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A2B8534ECE31F18CB5873C613FC1DEEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C19AB0BD8373B0728D48B196D880885 /* AudioburstMobileLibrary.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DC37B5656F8EBCF469346C2526DB9126 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9847E9B3E02447DABACE0EDF0F4F0AAD /* Pods-AudioburstSDK-ios.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9E26EAE2CD392AD762421F663075A1 /* Debug */,
+				63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		642C4DB234C39CD80A72826B276F3CE7 /* Build configuration list for PBXAggregateTarget "AudioburstMobileLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2B8534ECE31F18CB5873C613FC1DEEC /* Debug */,
+				1ADA423FE3A56F0DB52DEC3991E80BDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A205062B3688C2B6D6BE1E1672998E87 /* Build configuration list for PBXNativeTarget "Pods-AudioburstSDK-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC37B5656F8EBCF469346C2526DB9126 /* Debug */,
+				8AF8ADE8A05F2EFADC58FF3E8FFF7F9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
