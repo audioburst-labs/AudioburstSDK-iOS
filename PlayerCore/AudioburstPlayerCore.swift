@@ -15,20 +15,25 @@ public class AudioburstPlayerCore {
     var burstPlayer: BurstPlayer
     var applicationKey: String?
 
-    public var delegate: AudioburstPlayerCoreDelegate?
-
     public init(applicationKey: String, delegate: AudioburstPlayerCoreDelegate? = nil) {
         self.applicationKey = applicationKey
         self.audioburstLibrary = AudioburstLibrary(applicationKey: applicationKey)
         self.burstPlayer = BurstPlayer()
-        self.delegate = delegate
+        self.burstPlayer.delegate = delegate
         audioburstLibrary.setPlaybackStateListener(listener: burstPlayer)
     }
 
     deinit {
         audioburstLibrary.stop()
         audioburstLibrary.removePlaybackStateListener(listener: burstPlayer)
+        self.burstPlayer.delegate = nil
+
     }
+
+    public func set(delegate: AudioburstPlayerCoreDelegate) {
+        self.burstPlayer.delegate = delegate
+    }
+    
 
     public func play() {
         audioburstLibrary.start()
@@ -51,6 +56,12 @@ public class AudioburstPlayerCore {
     public func getPlaylist(voiceData: Data, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void)
     {
         audioburstLibrary.getPlaylist(data: voiceData, onData: { [weak self] playlist in
+
+            playlist.bursts.map{burst in
+                print("--- \(burst.title) \n")
+            }
+
+
             completion(.success(playlist))
         }, onError: { (error) in
             completion(.failure(AudioburstError(libraryError: error)))
@@ -73,12 +84,12 @@ extension AudioburstPlayerCore: AudioburstPlayerCoreHandler {
               let playlist = burstPlayer.playlist else { return nil }
         let isFirst = index == 0
         let isLast = index == (playlist.bursts.capacity - 1)
-        return CurrentBurst(object: burst, index: index , isFirst: isFirst, isLast: isLast)
+        return CurrentBurst(object: burst, index: index, isFirst: isFirst, isLast: isLast)
     }
 
 
     public var status: PlayerStatus {
-        return PlayerStatus(isPlaying: true, isFullSource: true, progress: 0.0, duration: 0.0, start: 0.0, end: 0.0)
+        return PlayerStatus(isPlaying: burstPlayer.isPlaying, isFullSource: false, progress: burstPlayer.progress, duration: burstPlayer.duration, start: 0.0, end: 0.0, passedTime: burstPlayer.passedTime)
     }
 
 

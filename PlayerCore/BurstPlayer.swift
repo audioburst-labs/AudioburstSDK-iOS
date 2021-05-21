@@ -10,19 +10,28 @@ import AVKit
 import AudioburstMobileLibrary
 
 class BurstPlayer {
-
     var player: AVQueuePlayer?
     var playerItems: [AVPlayerItem]?
     var playlist: Playlist?
 
     var delegate: AudioburstPlayerCoreDelegate?
 
-    var duration: Float {
-        guard let item = player?.currentItem, item.status == .readyToPlay else { return 0.0 }
-        let value = Float(CMTimeGetSeconds(item.duration))
-        return value.isNaN ? 0.0 : value
+    //MARK: status
+    var timeObserverToken: Any?
+    var durationObservation: NSKeyValueObservation?
+    var statusObservation: NSKeyValueObservation?
+    var timeControlStatusObservation: NSKeyValueObservation?
+    var queueStatusObservation: NSKeyValueObservation?
+
+
+    init() {
+        prepareToPlay()
     }
 
+    deinit {
+        cleanup()
+    }
+   
     func play() {
         player?.play()
     }
@@ -66,9 +75,14 @@ class BurstPlayer {
     }
 
     func load(_ playlist: Playlist) -> Bool {
+        cleanup()
         playerItems = preparePlayerItems(from: playlist.bursts)
         guard let playerItems = playerItems else {return false}
+        self.playlist = playlist
+
+        
         player = AVQueuePlayer(items: playerItems)
+        prepareToPlay()
         return true
     }
 
@@ -94,16 +108,7 @@ class BurstPlayer {
     }
 }
 
-extension BurstPlayer: PlaybackStateListener {
-    public func getPlaybackState() -> PlaybackState? {
-        guard let asset = (player?.currentItem?.asset) as? AVURLAsset, let player = self.player else {
-            return nil
-        }
-        let url = asset.url.absoluteString
-        let contentPositionMilis = (player.currentTime().seconds)*1000
-        return PlaybackState(url: url, positionMillis: Int64(contentPositionMilis))
-    }
-}
+
 
 
 

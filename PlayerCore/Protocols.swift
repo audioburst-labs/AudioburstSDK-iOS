@@ -9,20 +9,21 @@ import Foundation
 import AudioburstMobileLibrary
 
 public struct CurrentBurst {
-    let object: Burst
-    let index: Int
-    let isFirst: Bool
-    let isLast: Bool
+    public let object: Burst
+    public let index: Int
+    public let isFirst: Bool
+    public let isLast: Bool
 }
 
 public struct PlayerStatus {
-    let isPlaying: Bool
-    let isFullSource: Bool
+    public let isPlaying: Bool
+    public let isFullSource: Bool
     /// Relative: in range 0.0 - 1.0
-    let progress: Float
-    let duration: Float
-    let start: Float
-    let end: Float
+    public let progress: Float
+    public let duration: Float
+    public let start: Float
+    public let end: Float
+    public let passedTime: Float
 }
 
 public protocol AudioburstPlayerCoreHandler: class {

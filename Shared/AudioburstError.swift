@@ -45,11 +45,6 @@ public enum AudioburstError: LocalizedError {
         default:
             self = .other(libraryError as? Error)
         }
-
     }
-
-
-
-
 }
 
