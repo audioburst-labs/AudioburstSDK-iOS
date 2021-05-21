@@ -11,66 +11,80 @@ import AVKit
 
 public class AudioburstPlayerCore {
 
-    var audioburstLibrary: AudioburstLibrary?
-    var player: AVPlayer?
+    var audioburstLibrary: AudioburstLibrary
+    var burstPlayer: BurstPlayer
+    var applicationKey: String?
 
-    private var statusObservation: NSKeyValueObservation?
+    public var delegate: AudioburstPlayerCoreDelegate?
 
-    public init() {
-        audioburstLibrary = AudioburstLibrary(applicationKey: "InternalDevTest")
-        audioburstLibrary?.setPlaybackStateListener(listener: self)
+    public init(applicationKey: String, delegate: AudioburstPlayerCoreDelegate? = nil) {
+        self.applicationKey = applicationKey
+        self.audioburstLibrary = AudioburstLibrary(applicationKey: applicationKey)
+        self.burstPlayer = BurstPlayer()
+        self.delegate = delegate
+        audioburstLibrary.setPlaybackStateListener(listener: burstPlayer)
     }
 
     deinit {
-        audioburstLibrary?.stop()
-        audioburstLibrary?.removePlaybackStateListener(listener: self)
+        audioburstLibrary.stop()
+        audioburstLibrary.removePlaybackStateListener(listener: burstPlayer)
     }
 
-    public func load(voiceData: Data, completion: @escaping (_ result: Bool) -> Void)
+    public func play() {
+        audioburstLibrary.start()
+        burstPlayer.play()
+    }
+
+    public func pause() {
+        audioburstLibrary.stop()
+        burstPlayer.pause()
+    }
+
+    public func previous() {
+        burstPlayer.previous()
+    }
+
+    public func next() {
+        burstPlayer.next()
+    }
+
+    public func getPlaylist(voiceData: Data, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void)
     {
-        audioburstLibrary?.getPlaylist(data: voiceData, onData: { [weak self] (playlist) in
-            print(playlist)
-            guard let burst = playlist.bursts.first else { return }
-            self?.play(burst: burst)
-            completion(true)
+        audioburstLibrary.getPlaylist(data: voiceData, onData: { [weak self] playlist in
+            completion(.success(playlist))
         }, onError: { (error) in
-            print(error)
-            completion(false)
+            completion(.failure(AudioburstError(libraryError: error)))
         })
     }
 
-    func play(burst: Burst) {
-        guard let url = URL(string: burst.audioUrl) else { return }
-        let playerItem = AVPlayerItem(url: url)
+    // public func getPlaylist(playlistInfo: PlaylistInfo, completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
 
+    // public func getPersonalPlaylist(completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
 
-        player = AVPlayer(playerItem: playerItem)
-
-        statusObservation = player?.observe(\.timeControlStatus, options: [.new, .old], changeHandler: { [weak self]
-            (playerItem, change) in
-            switch (playerItem.timeControlStatus) {
-            case .playing:
-                self?.audioburstLibrary?.start()
-            default:
-                self?.audioburstLibrary?.stop()
-            }
-        })
-
-        player?.play()
+    public func load(_ playlist: Playlist) -> Bool {
+        burstPlayer.load(playlist)
     }
-
 }
 
-extension AudioburstPlayerCore: PlaybackStateListener {
-    public func getPlaybackState() -> PlaybackState? {
-        guard let asset = (player?.currentItem?.asset) as? AVURLAsset, let player = self.player else {
-            print("returned nil")
-            return nil
-        }
-        let url = asset.url.absoluteString
-        print(player.currentTime())
-        let contentPositionMilis = (player.currentTime().seconds)*1000
-        print("returned PlaybackState \(url)  \(contentPositionMilis)")
-        return PlaybackState(url: url, positionMillis: Int64(contentPositionMilis))
+extension AudioburstPlayerCore: AudioburstPlayerCoreHandler {
+    public var currentBurst: CurrentBurst? {
+        guard let burst = burstPlayer.getCurrentBurst(),
+              let index = burstPlayer.getCurrentItemIndex(),
+              let playlist = burstPlayer.playlist else { return nil }
+        let isFirst = index == 0
+        let isLast = index == (playlist.bursts.capacity - 1)
+        return CurrentBurst(object: burst, index: index , isFirst: isFirst, isLast: isLast)
     }
+
+
+    public var status: PlayerStatus {
+        return PlayerStatus(isPlaying: true, isFullSource: true, progress: 0.0, duration: 0.0, start: 0.0, end: 0.0)
+    }
+
+
+    public var playlist: Playlist? {
+        burstPlayer.playlist
+    }
+    
+
 }

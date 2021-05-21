@@ -7,18 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44020221265285CB00EE8495 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44020220265285CB00EE8495 /* Protocols.swift */; };
+		440202422653C56D00EE8495 /* BurstPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440202412653C56D00EE8495 /* BurstPlayer.swift */; };
 		4412DD0D26492BAC0013F41D /* AudioburstSDK_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 4412DD0B26492BAC0013F41D /* AudioburstSDK_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4412DD1A26492D2D0013F41D /* AudioburstPlayerCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4412DD1926492D2D0013F41D /* AudioburstPlayerCore.swift */; };
-		448993C7264D5AB600746288 /* AudioburstPlayerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448993C6264D5AB600746288 /* AudioburstPlayerError.swift */; };
+		444AC524265525CF005453C5 /* AudioburstError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AC523265525CF005453C5 /* AudioburstError.swift */; };
+		44899429264E939400746288 /* Collections+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44899428264E939400746288 /* Collections+Safe.swift */; };
 		DFBB8CAA330DEF8B1382116D /* libPods-AudioburstSDK-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED283C8CAD5F5C1582A0D5A2 /* libPods-AudioburstSDK-ios.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44020220265285CB00EE8495 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		440202412653C56D00EE8495 /* BurstPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurstPlayer.swift; sourceTree = "<group>"; };
 		4412DD0826492BAC0013F41D /* AudioburstSDK_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioburstSDK_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4412DD0B26492BAC0013F41D /* AudioburstSDK_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioburstSDK_ios.h; sourceTree = "<group>"; };
 		4412DD0C26492BAC0013F41D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4412DD1926492D2D0013F41D /* AudioburstPlayerCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioburstPlayerCore.swift; sourceTree = "<group>"; };
-		448993C6264D5AB600746288 /* AudioburstPlayerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioburstPlayerError.swift; path = ../../audioburst/AudioburstPlayer/AudioburstPlayerError.swift; sourceTree = "<group>"; };
+		444AC523265525CF005453C5 /* AudioburstError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioburstError.swift; sourceTree = "<group>"; };
+		44899428264E939400746288 /* Collections+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+Safe.swift"; sourceTree = "<group>"; };
 		AAB6029FAE738FF322C7B23B /* Pods-AudioburstSDK-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioburstSDK-ios.release.xcconfig"; path = "Target Support Files/Pods-AudioburstSDK-ios/Pods-AudioburstSDK-ios.release.xcconfig"; sourceTree = "<group>"; };
 		BC99C56ED08AC865344ED6E5 /* Pods-AudioburstSDK-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioburstSDK-ios.debug.xcconfig"; path = "Target Support Files/Pods-AudioburstSDK-ios/Pods-AudioburstSDK-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		ED283C8CAD5F5C1582A0D5A2 /* libPods-AudioburstSDK-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AudioburstSDK-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				4412DD1926492D2D0013F41D /* AudioburstPlayerCore.swift */,
+				44020220265285CB00EE8495 /* Protocols.swift */,
+				440202412653C56D00EE8495 /* BurstPlayer.swift */,
 			);
 			path = PlayerCore;
 			sourceTree = "<group>";
@@ -93,9 +101,18 @@
 		448993C5264D5AAB00746288 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				448993C6264D5AB600746288 /* AudioburstPlayerError.swift */,
+				444AC523265525CF005453C5 /* AudioburstError.swift */,
+				44899427264E937F00746288 /* Extensions */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		44899427264E937F00746288 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44899428264E939400746288 /* Collections+Safe.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +221,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4412DD1A26492D2D0013F41D /* AudioburstPlayerCore.swift in Sources */,
-				448993C7264D5AB600746288 /* AudioburstPlayerError.swift in Sources */,
+				44899429264E939400746288 /* Collections+Safe.swift in Sources */,
+				44020221265285CB00EE8495 /* Protocols.swift in Sources */,
+				440202422653C56D00EE8495 /* BurstPlayer.swift in Sources */,
+				444AC524265525CF005453C5 /* AudioburstError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +371,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.audioburst.AudioburstSDK-ios";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

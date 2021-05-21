@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   # PlayerCore
    s.subspec 'AudioburstPlayerCore' do |sp|
-     sp.source_files  = 'PlayerCore/*.swift', 'Shared/*.swift'
+     sp.source_files  = 'PlayerCore/*.swift', 'Shared/*/*.swift', 'Shared/*.swift'
    end
 
 
