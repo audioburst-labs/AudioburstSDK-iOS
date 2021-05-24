@@ -11,6 +11,7 @@
 		440202422653C56D00EE8495 /* BurstPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440202412653C56D00EE8495 /* BurstPlayer.swift */; };
 		4412DD0D26492BAC0013F41D /* AudioburstSDK_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 4412DD0B26492BAC0013F41D /* AudioburstSDK_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4412DD1A26492D2D0013F41D /* AudioburstPlayerCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4412DD1926492D2D0013F41D /* AudioburstPlayerCore.swift */; };
+		443D9156265BBD9F00C6DB7C /* URL+http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D9155265BBD9F00C6DB7C /* URL+http.swift */; };
 		444AC524265525CF005453C5 /* AudioburstError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AC523265525CF005453C5 /* AudioburstError.swift */; };
 		444AC5882657BA9D005453C5 /* BurstPlayer+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AC5872657BA9D005453C5 /* BurstPlayer+Status.swift */; };
 		444AC59F2657D658005453C5 /* TimeToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AC59E2657D658005453C5 /* TimeToString.swift */; };
@@ -25,6 +26,7 @@
 		4412DD0B26492BAC0013F41D /* AudioburstSDK_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioburstSDK_ios.h; sourceTree = "<group>"; };
 		4412DD0C26492BAC0013F41D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4412DD1926492D2D0013F41D /* AudioburstPlayerCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioburstPlayerCore.swift; sourceTree = "<group>"; };
+		443D9155265BBD9F00C6DB7C /* URL+http.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+http.swift"; sourceTree = "<group>"; };
 		444AC523265525CF005453C5 /* AudioburstError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioburstError.swift; sourceTree = "<group>"; };
 		444AC5872657BA9D005453C5 /* BurstPlayer+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BurstPlayer+Status.swift"; sourceTree = "<group>"; };
 		444AC59E2657D658005453C5 /* TimeToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeToString.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				444AC59E2657D658005453C5 /* TimeToString.swift */,
 				44899428264E939400746288 /* Collections+Safe.swift */,
+				443D9155265BBD9F00C6DB7C /* URL+http.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				440202422653C56D00EE8495 /* BurstPlayer.swift in Sources */,
 				444AC524265525CF005453C5 /* AudioburstError.swift in Sources */,
 				444AC5882657BA9D005453C5 /* BurstPlayer+Status.swift in Sources */,
+				443D9156265BBD9F00C6DB7C /* URL+http.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

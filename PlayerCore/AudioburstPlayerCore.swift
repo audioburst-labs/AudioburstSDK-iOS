@@ -11,15 +11,14 @@ import AVKit
 
 public class AudioburstPlayerCore {
 
-    var audioburstLibrary: AudioburstLibrary
-    var burstPlayer: BurstPlayer
+    private (set) public var audioburstLibrary: AudioburstLibrary
+    private (set) public var burstPlayer: BurstPlayer
     var applicationKey: String?
 
     public init(applicationKey: String, delegate: AudioburstPlayerCoreDelegate? = nil) {
         self.applicationKey = applicationKey
         self.audioburstLibrary = AudioburstLibrary(applicationKey: applicationKey)
-        audioburstLibrary.filterListenedBursts(enabled: false)
-        self.burstPlayer = BurstPlayer()
+        self.burstPlayer = BurstPlayer(mobileLibrary: audioburstLibrary)
         self.burstPlayer.delegate = delegate
         audioburstLibrary.setPlaybackStateListener(listener: burstPlayer)
     }
@@ -34,7 +33,6 @@ public class AudioburstPlayerCore {
     public func set(delegate: AudioburstPlayerCoreDelegate) {
         self.burstPlayer.delegate = delegate
     }
-    
 
     public func play() {
         audioburstLibrary.start()
@@ -56,11 +54,7 @@ public class AudioburstPlayerCore {
 
     public func getPlaylist(voiceData: Data, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void)
     {
-        audioburstLibrary.getPlaylist(data: voiceData, onData: { [weak self] playlist in
-
-            playlist.bursts.map{burst in
-                print("--- \(burst.title) \n")
-            }
+        audioburstLibrary.getPlaylist(data: voiceData, onData: { playlist in
             completion(.success(playlist))
         }, onError: { (error) in
             completion(.failure(AudioburstError(libraryError: error)))
@@ -68,19 +62,24 @@ public class AudioburstPlayerCore {
     }
 
     public func getPlaylist(playlistInfo: PlaylistInfo, completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {
-        audioburstLibrary.getPlaylist(playlistInfo: playlistInfo, onData: { [weak self] playlist in
-
-            playlist.bursts.map{burst in
-                print("--- \(burst.title) \n")
-            }
+        audioburstLibrary.getPlaylist(playlistInfo: playlistInfo, onData: { playlist in
             completion(.success(playlist))
         }, onError: { (error) in
             completion(.failure(AudioburstError(libraryError: error)))
         })
-
     }
 
-    // public func getPersonalPlaylist(completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
+    public func getPlaylists(completion: @escaping (_ result: Swift.Result<[PlaylistInfo], Error>) -> Void) {
+        audioburstLibrary.getPlaylists(
+            onData: { playlists in
+                completion(.success(playlists))
+            },
+            onError: { error in
+                completion(.failure(AudioburstError(libraryError: error)))
+            })
+    }
+
+    //public func getPersonalPlaylist(completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
 
     public func load(_ playlist: Playlist, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
         burstPlayer.load(playlist) { result in
@@ -101,13 +100,11 @@ extension AudioburstPlayerCore: AudioburstPlayerCoreHandler {
 
 
     public var status: PlayerStatus {
-        return PlayerStatus(isPlaying: burstPlayer.isPlaying, isFullSource: false, progress: burstPlayer.progress, duration: burstPlayer.duration, passedTime: burstPlayer.passedTime)
+        return PlayerStatus(isPlaying: burstPlayer.isPlaying, isFullSource: burstPlayer.isFullSource, progress: burstPlayer.progress, duration: burstPlayer.duration, passedTime: burstPlayer.passedTime)
     }
-
 
     public var playlist: Playlist? {
         burstPlayer.playlist
     }
-    
 
 }
