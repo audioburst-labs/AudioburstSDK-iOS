@@ -35,10 +35,11 @@ extension BurstPlayer {
 
 
     func prepareToPlay() {
+        print("-- prepareToPlay")
         cleanup()
-        statusObservation = player?.currentItem?.observe(\.status, options: [.new]) { [weak self] observedItem, change in
-           // self?.delegate?.didChangePlayerStatus()
-        }
+//        statusObservation = player?.currentItem?.observe(\.status, options: [.new]) { [weak self] observedItem, change in
+//           // self?.delegate?.didChangePlayerStatus()
+//        }
 
         durationObservation = player?.currentItem?.observe(\.duration, options: [.new]) { [weak self] observedItem, change in
             if observedItem.duration != .indefinite {
@@ -52,13 +53,14 @@ extension BurstPlayer {
 
         queueStatusObservation = player?.observe(\.currentItem, options: [.new, .initial]) {
             [weak self] (player, _) in
-
-//            if let token = self?.timeObserverToken {
-//                self?.player?.removeTimeObserver(token)
-//                self?.timeObserverToken = nil
-//            }
+            print("-- observe currentItem")
 
             self?.delegate?.didChangeCurrentBurst()
+        }
+
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem, queue: .main) { [weak self] object in
+            print("-- current item finished playing")
+            self?.next()
         }
     }
 
@@ -73,6 +75,7 @@ extension BurstPlayer {
         durationObservation = nil
         statusObservation = nil
         timeControlStatusObservation = nil
+        
     }
 
     private func createPeriodicTimeObserver() {
@@ -87,8 +90,6 @@ extension BurstPlayer {
         let seconds = min(max(0.1, itemDuration / 500.0), 0.5)
         let interval = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         timeObserverToken = player?.addPeriodicTimeObserver(forInterval: interval, queue: nil) { [weak self] time in
-            //let progress = Float((CMTimeGetSeconds(time) / itemDuration))
-            //self?.onProgressChanged?(progress, Float(itemDuration))
             self?.delegate?.didChangePlaybackTime()
         }
     }

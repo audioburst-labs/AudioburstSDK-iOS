@@ -10,8 +10,8 @@ import AVKit
 import AudioburstMobileLibrary
 
 class BurstPlayer {
-    var player: AVQueuePlayer?
-    var playerItems: [AVPlayerItem]?
+    var player: AVPlayer?
+    //var playerItems: [AVPlayerItem]?
     var playlist: Playlist?
 
     var delegate: AudioburstPlayerCoreDelegate?
@@ -22,10 +22,10 @@ class BurstPlayer {
     var statusObservation: NSKeyValueObservation?
     var timeControlStatusObservation: NSKeyValueObservation?
     var queueStatusObservation: NSKeyValueObservation?
-
+    //var endPlayingObservation: NSKeyValueObservation?
 
     init() {
-        prepareToPlay()
+        //prepareToPlay()
     }
 
     deinit {
@@ -41,14 +41,14 @@ class BurstPlayer {
     }
 
     func previous() {
-        guard let currentIndex = getCurrentItemIndex() else { return }
+        guard let currentIndex = getCurrentItemIndex(), currentIndex != 0 else { return }
         play(at: (currentIndex - 1))
     }
 
     func next() {
-        guard let currentIndex = getCurrentItemIndex(), let playerItemsCount = playerItems?.count else { return }
-        if currentIndex < playerItemsCount-1 {
-            player?.advanceToNextItem()
+        guard let currentIndex = getCurrentItemIndex(), let burstsCount = playlist?.bursts.count else { return }
+        if currentIndex < burstsCount-1 {
+            play(at: (currentIndex + 1))
         }
     }
 
@@ -62,49 +62,52 @@ class BurstPlayer {
     }
 
     func play(at itemIndex: Int) {
-        player?.removeAllItems()
-        guard let player = player, let playerItems = playerItems else { return }
-        for index in itemIndex...playerItems.count {
-            if let item = playerItems[safe: index] {
-                if player.canInsert(item, after: nil) {
-                    item.seek(to: .zero, completionHandler: nil)
-                    player.insert(item, after: nil)
-                }
-            }
+        print("-- play at item index \(itemIndex)")
+        guard let player = player, let item = preparePlayerItem(at: itemIndex) else { return }
+        let status = isPlaying
+        player.replaceCurrentItem(with: item)
+        player.seek(to: .zero)
+        prepareToPlay()
+        if status {
+            play()
         }
     }
 
-    func load(_ playlist: Playlist) -> Bool {
+
+    func load(_ playlist: Playlist, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
         cleanup()
-        playerItems = preparePlayerItems(from: playlist.bursts)
-        guard let playerItems = playerItems else {return false}
         self.playlist = playlist
 
-        
-        player = AVQueuePlayer(items: playerItems)
+        guard let item = preparePlayerItem(at: 0) else {
+            completion(.failure(AudioburstError.contentNotReady))
+            return  }
+        player = AVPlayer(playerItem: item)
+        player?.automaticallyWaitsToMinimizeStalling  = true
         prepareToPlay()
-        return true
+        completion(.success(playlist))
     }
 
-    func preparePlayerItems(from bursts: [Burst]) -> [AVPlayerItem] {
-        var items: [AVPlayerItem] = []
-        for burst in bursts {
-            if let streamUrl = burst.streamUrl, let url = URL(string: streamUrl) {
-                items.append(AVPlayerItem(url: url ) )
-            }
+
+    func preparePlayerItem(at index: Int) -> AVPlayerItem? {
+        var item: AVPlayerItem? = nil
+        if let burst = playlist?.bursts[safe: index], let streamUrl = burst.streamUrl, let url = URL(string: streamUrl) {
+            item = AVPlayerItem(url: url )
         }
-        return items
+        return item
     }
 
     func getCurrentItemIndex() -> Int? {
         guard let currentItem = player?.currentItem else {return nil}
-        return playerItems?.firstIndex(of: currentItem)
+        return playlist?.bursts.firstIndex(where: {$0.streamUrl == (currentItem.asset as? AVURLAsset)?.url.absoluteString })
     }
 
     func getCurrentBurst() -> Burst? {
-        guard let currentItem = player?.currentItem,
-              let index = playerItems?.firstIndex(of: currentItem) else {return nil}
-        return playlist?.bursts[safe: index]
+        guard let currentIndex = getCurrentItemIndex() else {return nil}
+        return playlist?.bursts[safe: currentIndex]
+    }
+
+    func handleAdIfNeeded() {
+        
     }
 }
 

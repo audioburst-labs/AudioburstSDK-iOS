@@ -18,6 +18,7 @@ public class AudioburstPlayerCore {
     public init(applicationKey: String, delegate: AudioburstPlayerCoreDelegate? = nil) {
         self.applicationKey = applicationKey
         self.audioburstLibrary = AudioburstLibrary(applicationKey: applicationKey)
+        audioburstLibrary.filterListenedBursts(enabled: false)
         self.burstPlayer = BurstPlayer()
         self.burstPlayer.delegate = delegate
         audioburstLibrary.setPlaybackStateListener(listener: burstPlayer)
@@ -60,20 +61,31 @@ public class AudioburstPlayerCore {
             playlist.bursts.map{burst in
                 print("--- \(burst.title) \n")
             }
-
-
             completion(.success(playlist))
         }, onError: { (error) in
             completion(.failure(AudioburstError(libraryError: error)))
         })
     }
 
-    // public func getPlaylist(playlistInfo: PlaylistInfo, completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
+    public func getPlaylist(playlistInfo: PlaylistInfo, completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {
+        audioburstLibrary.getPlaylist(playlistInfo: playlistInfo, onData: { [weak self] playlist in
+
+            playlist.bursts.map{burst in
+                print("--- \(burst.title) \n")
+            }
+            completion(.success(playlist))
+        }, onError: { (error) in
+            completion(.failure(AudioburstError(libraryError: error)))
+        })
+
+    }
 
     // public func getPersonalPlaylist(completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
 
-    public func load(_ playlist: Playlist) -> Bool {
-        burstPlayer.load(playlist)
+    public func load(_ playlist: Playlist, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
+        burstPlayer.load(playlist) { result in
+            completion(result)
+        }
     }
 }
 
@@ -89,7 +101,7 @@ extension AudioburstPlayerCore: AudioburstPlayerCoreHandler {
 
 
     public var status: PlayerStatus {
-        return PlayerStatus(isPlaying: burstPlayer.isPlaying, isFullSource: false, progress: burstPlayer.progress, duration: burstPlayer.duration, start: 0.0, end: 0.0, passedTime: burstPlayer.passedTime)
+        return PlayerStatus(isPlaying: burstPlayer.isPlaying, isFullSource: false, progress: burstPlayer.progress, duration: burstPlayer.duration, passedTime: burstPlayer.passedTime)
     }
 
 

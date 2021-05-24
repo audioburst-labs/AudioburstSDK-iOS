@@ -21,8 +21,6 @@ public struct PlayerStatus {
     /// Relative: in range 0.0 - 1.0
     public let progress: Float
     public let duration: Float
-    public let start: Float
-    public let end: Float
     public let passedTime: Float
 }
 
