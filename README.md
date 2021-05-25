@@ -12,5 +12,5 @@ AudioburstSDK offers the following modules:
 ### Audioburst API key
 All libraries require an application key that can be obtained via [Audioburst Publishers](https://publishers.audioburst.com/).
 
-[PlayerCore]: https://github.com/audioburst-labs/AudioburstSDK-iOS/tree/master/player-core
+[PlayerCore]: https://github.com/audioburst-labs/AudioburstSDK-iOS/tree/master/PlayerCore
 

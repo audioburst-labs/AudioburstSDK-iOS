@@ -125,4 +125,5 @@ The `AudioburstPlayerCore`  implements also `AudioburstPlayerCoreHandler` protoc
 ## Terms of Service
 [Terms of Service](https://audioburst.com/audioburst-publisher-terms)
 
-[Protocols]: https://github.com/audioburst-labs/AudioburstSDK-Android/blob/master/player-core/src/main/java/com/audioburst/player/core/media/BurstPlayer.kt 
+[Protocols]: https://github.com/audioburst-labs/AudioburstSDK-iOS/blob/master/PlayerCore/Protocols.swift
+
