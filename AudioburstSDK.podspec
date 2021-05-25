@@ -16,6 +16,11 @@ Pod::Spec.new do |s|
 
   s.dependency 'AudioburstMobileLibrary'
 
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+
   # PlayerCore
    s.subspec 'AudioburstPlayerCore' do |sp|
      sp.source_files  = 'PlayerCore/*.swift', 'Shared/*/*.swift', 'Shared/*.swift'
