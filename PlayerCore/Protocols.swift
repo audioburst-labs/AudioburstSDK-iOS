@@ -24,13 +24,13 @@ public struct PlayerStatus {
     public let passedTime: Float
 }
 
-public protocol AudioburstPlayerCoreHandler: class {
+public protocol AudioburstPlayerCoreHandler: AnyObject {
     var currentBurst: CurrentBurst? { get }
     var status: PlayerStatus { get }
     var playlist: Playlist? { get }
 }
 
-public protocol AudioburstPlayerCoreDelegate: class {
+public protocol AudioburstPlayerCoreDelegate: AnyObject {
     func didUpdatePlaylist()
     func didChangeCurrentBurst()
     func didChangePlayerStatus()

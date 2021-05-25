@@ -52,7 +52,7 @@ public class AudioburstPlayerCore {
         burstPlayer.next()
     }
 
-    public func getPlaylist(voiceData: Data, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void)
+    public func getPlaylist(with voiceData: Data, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void)
     {
         audioburstLibrary.getPlaylist(data: voiceData, onData: { playlist in
             completion(.success(playlist))
@@ -61,7 +61,7 @@ public class AudioburstPlayerCore {
         })
     }
 
-    public func getPlaylist(playlistInfo: PlaylistInfo, completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {
+    public func getPlaylist(with playlistInfo: PlaylistInfo, completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {
         audioburstLibrary.getPlaylist(playlistInfo: playlistInfo, onData: { playlist in
             completion(.success(playlist))
         }, onError: { (error) in
