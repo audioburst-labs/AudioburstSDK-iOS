@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
   s.version          = '0.0.1'
   s.summary          = 'Official SDK from Audioburst'
 
-  s.homepage         = 'https://github.com/audioburst-labs/AudioburstPlayer-iOS'
+  s.homepage         = 'https://github.com/audioburst-labs/AudioburstSDK-iOS'
   s.license          = { :type => 'Custom'}
   s.author           = { 'Audioburst' => 'alex.kobylak@audioburst.com' }
-  s.source           = { :git => 'https://github.com/audioburst-labs/AudioburstPlayer-iOS.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/audioburst-labs/AudioburstSDK-iOS.git', :tag => s.version.to_s }
 
   s.platform = :ios
   s.ios.deployment_target = '12.0'
@@ -20,6 +20,4 @@ Pod::Spec.new do |s|
    s.subspec 'AudioburstPlayerCore' do |sp|
      sp.source_files  = 'PlayerCore/*.swift', 'Shared/*/*.swift', 'Shared/*.swift'
    end
-
-
 end
