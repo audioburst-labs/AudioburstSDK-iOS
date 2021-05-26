@@ -102,6 +102,7 @@ public class BurstPlayer {
             self?.player = AVPlayer(playerItem: item)
             self?.player?.automaticallyWaitsToMinimizeStalling  = true
             self?.prepareToPlay()
+            self?.delegate?.didUpdatePlaylist()
             completion(.success(playlist))
         }
     }
