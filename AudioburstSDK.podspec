@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AudioburstSDK'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'Official SDK from Audioburst'
 
   s.homepage         = 'https://github.com/audioburst-labs/AudioburstSDK-iOS'
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files = '*/*.swift'
 
-  s.dependency 'AudioburstMobileLibrary'
+  s.dependency 'AudioburstMobileLibrary', '~> 0.0.21'
 
   s.pod_target_xcconfig = {
     'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'

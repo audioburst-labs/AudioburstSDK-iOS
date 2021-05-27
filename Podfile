@@ -3,5 +3,5 @@ inhibit_all_warnings!
 
 target 'AudioburstSDK-ios' do
   #
-  pod 'AudioburstMobileLibrary'
+  pod 'AudioburstMobileLibrary', '~> 0.0.21'
 end
