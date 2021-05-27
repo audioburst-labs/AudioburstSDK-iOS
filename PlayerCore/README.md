@@ -3,7 +3,7 @@ A library that allows you to access Audioburst content and add playback function
 
 ## Get Started
 
-This guide is a quick walkthrough to add `AudioburstPlayerCore` to an iOS app. 
+This guide is a quick walkthrough to add `AudioburstPlayerCore` to an iOS app.
 
 ## Add `AudioburstPlayerCore` to your app
 
@@ -46,7 +46,7 @@ playerCore.getPlaylists() { result in
 playerCore.getPlaylist(with: playlistItem){ result in
     switch result {
     case .success(let playlist):
-        //load playlist to play 
+        //load playlist to play
     case .failure(let error):
         //handle error
     }
@@ -60,7 +60,7 @@ playerCore.getPlaylist(with: playlistItem){ result in
 playerCore.getPlaylist(with: voiceData){ result in
     switch result {
     case .success(let playlist):
-        //load playlist to play 
+        //load playlist to play
     case .failure(let error):
         //handle error
     }
@@ -68,6 +68,20 @@ playerCore.getPlaylist(with: voiceData){ result in
 ```
 
 The `getPlaylist` function accepts `Data` as an argument. A request included in the PCM file will be processed and a playlist of the bursts will be returned.
+
+## Search for a query
+`AudioburstPlayerCore` exposes an ability to search for a text query. The response will either be a `Playlist` with the list of `Bursts` found OR a `noSearchResults` error.
+
+```swift
+playerCore.search(query){ result in
+    switch result {
+    case .success(let playlist):
+        //load playlist to play
+    case .failure(let error):
+        //handle error
+    }
+}
+```
 
 ## Use Cta Data
 `Burst` class exposes nullable `CtaData`, which you can use to show a CTA (Call to action) button which prompts the user to an immediate response.
@@ -91,7 +105,7 @@ When you already have a `Playlist` that you would like to play, you can use `loa
     case .success(let playlist):
         //loaded successfully - show playback controls
     case .failure(let error):
-        //handle error 
+        //handle error
     }
 }
 ```
@@ -115,7 +129,7 @@ or with method
 playerCore.set(delegate: self)
 ```
 
-The `AudioburstPlayerCore`  implements also `AudioburstPlayerCoreHandler` protocol. Using properties declared in this protocol you can get information about current burst, playback status or current playlist. 
+The `AudioburstPlayerCore`  implements also `AudioburstPlayerCoreHandler` protocol. Using properties declared in this protocol you can get information about current burst, playback status or current playlist.
 
 [Protocols][Protocols]  
 
@@ -125,4 +139,4 @@ The `AudioburstPlayerCore`  implements also `AudioburstPlayerCoreHandler` protoc
 ## Terms of Service
 [Terms of Service](https://audioburst.com/audioburst-publisher-terms)
 
-[Protocols]: https://github.com/audioburst-labs/AudioburstSDK-Android/blob/master/player-core/src/main/java/com/audioburst/player/core/media/BurstPlayer.kt 
+[Protocols]: https://github.com/audioburst-labs/AudioburstSDK-Android/blob/master/player-core/src/main/java/com/audioburst/player/core/media/BurstPlayer.kt

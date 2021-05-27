@@ -23,7 +23,7 @@ This guide is a quick walkthrough to add AudioburstMobileLibrary to an Android a
 ## Add AudioburstMobileLibrary to your app
 
 ### Step 1. Add AudioburstMobileLibrary dependency
-[ ![Download Android](https://api.bintray.com/packages/audioburst/maven/mobile-library/images/download.svg) ](https://bintray.com/audioburst/maven/mobile-library/_latestVersion)
+![GitHub release](https://img.shields.io/github/v/release/audioburst-labs/AudioburstMobileLibrary)
 
 Add AudioburstMobileLibrary Android SDK to your project. To do this, add the following dependency in your app level `build.gradle` file:
 ```gradle
@@ -91,6 +91,18 @@ audioburstLibrary.getPlaylist(playlistItem)
     }
 ```
 
+## Search for a query
+The Library exposes an ability to search for a text query. The response will either be a `Playlist` with the list of `Bursts` found OR a `NoSearchResults` error.  
+```kotlin
+audioburstLibrary.search(query)
+    .onData { playlist ->
+        // Build your playback queue by using list of Bursts
+    }
+    .onError { error -> 
+        // Handle error
+    }
+```
+
 ## Get advertisement url
 You can also play advertisements before playlist items (bursts.)
 To do so, check if a specific `Burst` has an ad by calling `Burst.isAdAvailable`. 
@@ -148,6 +160,14 @@ audioburstLibrary
             } 
     }
 ```  
+
+## Use Cta Data
+`Burst` class exposes nullable `CtaData`, which you can use to show a CTA (Call to action) button which prompts the user to an immediate response.
+The CtaData, when available, provides the text to be shown on the button (`buttonText`) and the link (`url`) to open in a browser upon clicking the button.
+When the user clicks this button, you should call the following function to inform the library about this:
+```kotlin
+audioburstLibrary.ctaButtonClick(burstId)
+```
 
 ## Pass recorded PCM file
 `AudioburstLibrary` is able to process raw audio files that contain a recorded request of what should be played. You can record a voice command stating what you would like to listen to and then upload it to your device and use AudioburstLibrary to get bursts on this topic.
@@ -260,6 +280,8 @@ This guide is a quick walkthrough to add AudioburstMobileLibrary to an iOS app. 
 ## Add AudioburstMobileLibrary to your app
 
 ### Step 1. Add AudioburstMobileLibrary dependency
+![GitHub release](https://img.shields.io/github/v/release/audioburst-labs/AudioburstMobileLibrary)
+
 You can use [CocoaPods](http://cocoapods.org/) to install [AudioburstPlayer](https://cocoapods.org/pods/AudioburstMobileLibrary) by adding it to your `Podfile`:
 
 ```ruby
@@ -267,7 +289,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 target 'MyApp' do
-    pod 'AudioburstMobileLibrary', '~> 0.0.16'
+    pod 'AudioburstMobileLibrary', '~> {latest-version}'
 end
 ```
 
@@ -303,6 +325,16 @@ audioburstLibrary.getPlaylists { playlists in
 ## Get playlist information
 ```swift
 audioburstLibrary.getPlaylist(playlistInfo: playlistInfo) { playlist in
+    // Build your playback queue by using list of Bursts
+} onError: { errorType in
+    // Handle error
+}
+```
+
+## Search for a query
+The Library exposes an ability to search for a text query. The response will either be a `Playlist` with the list of `Bursts` found OR a `NoSearchResults` error.
+```swift
+audioburstLibrary.search(query: query) { playlist in
     // Build your playback queue by using list of Bursts
 } onError: { errorType in
     // Handle error
@@ -353,6 +385,14 @@ audioburstLibrary.getPersonalPlaylist { pendingPlaylist in
 } onError: { error in
     // Handle error
 }
+```
+
+## Use Cta Data
+`Burst` class exposes nullable `CtaData`, which you can use to show a CTA (Call to action) button which prompts the user to an immediate response.
+The CtaData, when available, provides the text to be shown on the button (`buttonText`) and the link (`url`) to open in a browser upon clicking the button.
+When the user clicks this button, you should call the following function to inform the library about this:
+```kotlin
+audioburstLibrary.ctaButtonClick(burstId)
 ```
 
 ## Pass recorded PCM file

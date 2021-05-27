@@ -86,6 +86,15 @@ public class AudioburstPlayerCore {
             completion(result)
         }
     }
+
+    public func search(_ query: String, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
+        audioburstLibrary.search(query: query,
+                                 onData: { playlist in
+                                    completion(.success(playlist))
+                                 }, onError: { (error) in
+                                    completion(.failure(AudioburstError(libraryError: error)))
+                                 })
+    }
 }
 
 extension AudioburstPlayerCore: AudioburstPlayerCoreHandler {
