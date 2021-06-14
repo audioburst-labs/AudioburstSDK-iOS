@@ -17,6 +17,7 @@ public struct CurrentBurst {
 
 public struct PlayerStatus {
     public let isPlaying: Bool
+    public let isLoaded: Bool
     public let isFullSource: Bool
     /// Relative: in range 0.0 - 1.0
     public let progress: Float
@@ -35,4 +36,10 @@ public protocol AudioburstPlayerCoreDelegate: AnyObject {
     func didChangeCurrentBurst()
     func didChangePlayerStatus()
     func didChangePlaybackTime()
+}
+
+public protocol BurstPlayerProtocol: AnyObject {
+    func seekTo(position: Float)
+    func toggleSource()
+    func play(at itemIndex: Int)
 }

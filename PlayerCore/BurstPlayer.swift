@@ -9,8 +9,9 @@ import Foundation
 import AVKit
 import AudioburstMobileLibrary
 
-public class BurstPlayer {
-    var player: AVPlayer?
+
+class BurstPlayer: BurstPlayerProtocol {
+    var avPlayer: AVPlayer?
     var playlist: Playlist?
     var delegate: AudioburstPlayerCoreDelegate?
     let mobileLibrary: AudioburstLibrary
@@ -30,14 +31,25 @@ public class BurstPlayer {
     }
     
     func play() {
-        player?.play()
+        avPlayer?.play()
     }
     
     func pause() {
-        player?.pause()
+        avPlayer?.pause()
+    }
+
+    func stop() {
+        avPlayer?.pause()
+        //cleanup()
+        avPlayer = nil
+        playlist = nil
+        delegate?.didChangeCurrentBurst()
+        delegate?.didChangePlaybackTime()
+        delegate?.didChangePlayerStatus()
+        delegate?.didUpdatePlaylist()
     }
     
-    func previous() {
+    public func previous() {
         guard let currentIndex = getCurrentItemIndex(), currentIndex != 0 else { return }
         play(at: (currentIndex - 1))
     }
@@ -49,8 +61,8 @@ public class BurstPlayer {
         }
     }
     
-    public func seekTo(position: Float) {
-        guard let item = player?.currentItem, item.status == .readyToPlay else { return }
+    func seekTo(position: Float) {
+        guard let item = avPlayer?.currentItem, item.status == .readyToPlay else { return }
         item.cancelPendingSeeks()
         let seconds: Float = max(0, min(position, duration - 0.5))
         item.seek(to: CMTime(seconds: Double(seconds), preferredTimescale: Int32(NSEC_PER_SEC)), toleranceBefore: .zero, toleranceAfter: .zero) { result in
@@ -58,7 +70,7 @@ public class BurstPlayer {
         }
     }
     
-    public func toggleSource() {
+    func toggleSource() {
         guard let currentIndex = getCurrentItemIndex(), let currentBurst = getCurrentBurst() else { return }
         let status = isPlaying
         if isFullSource {
@@ -68,8 +80,8 @@ public class BurstPlayer {
             //load full source
             guard let url = URL(string: currentBurst.audioUrl) else { return }
             let item  = AVPlayerItem(url: url)
-            player?.replaceCurrentItem(with: item)
-            player?.seek(to: .zero)
+            avPlayer?.replaceCurrentItem(with: item)
+            avPlayer?.seek(to: .zero)
             prepareToPlay()
             if status {
                 play()
@@ -78,7 +90,7 @@ public class BurstPlayer {
     }
     
     func play(at itemIndex: Int) {
-        guard let player = player else { return }
+        guard let player = avPlayer else { return }
         let status = isPlaying
         preparePlayerItem(at: itemIndex) {[weak self] item in
             guard let item = item else { return }
@@ -99,8 +111,15 @@ public class BurstPlayer {
                 completion(.failure(AudioburstError.contentNotReady))
                 return
             }
-            self?.player = AVPlayer(playerItem: item)
-            self?.player?.automaticallyWaitsToMinimizeStalling  = true
+            self?.avPlayer = AVPlayer(playerItem: item)
+            self?.avPlayer?.automaticallyWaitsToMinimizeStalling  = true
+
+            guard let _ = self?.avPlayer else {
+                self?.playlist = nil
+                completion(.failure(AudioburstError.contentNotReady))
+                return
+            }
+
             self?.prepareToPlay()
             self?.delegate?.didUpdatePlaylist()
             completion(.success(playlist))
@@ -127,7 +146,7 @@ public class BurstPlayer {
         }
 
         if burst.isAdAvailable {
-            player?.pause()
+            avPlayer?.pause()
             mobileLibrary.getAdUrl(burst: burst,
                                    onData: {adUrl in
                                     debugPrint("Ad url received: \(adUrl)")
@@ -151,7 +170,7 @@ public class BurstPlayer {
     }
     
     func getCurrentItemIndex() -> Int? {
-        guard let currentItem = player?.currentItem else {return nil}
+        guard let currentItem = avPlayer?.currentItem else {return nil}
         let currentURLString = (currentItem.asset as? AVURLAsset)?.url.absoluteString
         return playlist?.bursts.firstIndex(where: {$0.streamUrl == currentURLString  || $0.audioUrl == currentURLString })
     }

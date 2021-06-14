@@ -12,44 +12,53 @@ import AVKit
 public class AudioburstPlayerCore {
 
     private (set) public var audioburstLibrary: AudioburstLibrary
-    private (set) public var burstPlayer: BurstPlayer
+    private var player: BurstPlayer
     var applicationKey: String?
+
+    public var burstPlayer: BurstPlayerProtocol {
+        player
+    }
 
     public init(applicationKey: String, delegate: AudioburstPlayerCoreDelegate? = nil) {
         self.applicationKey = applicationKey
         self.audioburstLibrary = AudioburstLibrary(applicationKey: applicationKey)
-        self.burstPlayer = BurstPlayer(mobileLibrary: audioburstLibrary)
-        self.burstPlayer.delegate = delegate
-        audioburstLibrary.setPlaybackStateListener(listener: burstPlayer)
+        self.player = BurstPlayer(mobileLibrary: audioburstLibrary)
+        self.player.delegate = delegate
+        audioburstLibrary.setPlaybackStateListener(listener: player)
     }
 
     deinit {
         audioburstLibrary.stop()
-        audioburstLibrary.removePlaybackStateListener(listener: burstPlayer)
-        self.burstPlayer.delegate = nil
+        audioburstLibrary.removePlaybackStateListener(listener: player)
+        self.player.delegate = nil
 
     }
 
     public func set(delegate: AudioburstPlayerCoreDelegate) {
-        self.burstPlayer.delegate = delegate
+        self.player.delegate = delegate
     }
 
     public func play() {
         audioburstLibrary.start()
-        burstPlayer.play()
+        player.play()
     }
 
     public func pause() {
         audioburstLibrary.stop()
-        burstPlayer.pause()
+        player.pause()
     }
 
     public func previous() {
-        burstPlayer.previous()
+        player.previous()
     }
 
     public func next() {
-        burstPlayer.next()
+        player.next()
+    }
+
+    public func stop() {
+        audioburstLibrary.stop()
+        player.stop()
     }
 
     public func getPlaylist(with voiceData: Data, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void)
@@ -82,7 +91,7 @@ public class AudioburstPlayerCore {
     //public func getPersonalPlaylist(completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
 
     public func load(_ playlist: Playlist, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
-        burstPlayer.load(playlist) { result in
+        player.load(playlist) { result in
             completion(result)
         }
     }
@@ -99,9 +108,9 @@ public class AudioburstPlayerCore {
 
 extension AudioburstPlayerCore: AudioburstPlayerCoreHandler {
     public var currentBurst: CurrentBurst? {
-        guard let burst = burstPlayer.getCurrentBurst(),
-              let index = burstPlayer.getCurrentItemIndex(),
-              let playlist = burstPlayer.playlist else { return nil }
+        guard let burst = player.getCurrentBurst(),
+              let index = player.getCurrentItemIndex(),
+              let playlist = player.playlist else { return nil }
         let isFirst = index == 0
         let isLast = index == (playlist.bursts.capacity - 1)
         return CurrentBurst(object: burst, index: index, isFirst: isFirst, isLast: isLast)
@@ -109,11 +118,11 @@ extension AudioburstPlayerCore: AudioburstPlayerCoreHandler {
 
 
     public var status: PlayerStatus {
-        return PlayerStatus(isPlaying: burstPlayer.isPlaying, isFullSource: burstPlayer.isFullSource, progress: burstPlayer.progress, duration: burstPlayer.duration, passedTime: burstPlayer.passedTime)
+        return PlayerStatus(isPlaying: player.isPlaying, isLoaded: player.isLoaded, isFullSource: player.isFullSource, progress: player.progress, duration: player.duration, passedTime: player.passedTime)
     }
 
     public var playlist: Playlist? {
-        burstPlayer.playlist
+        player.playlist
     }
 
 }
