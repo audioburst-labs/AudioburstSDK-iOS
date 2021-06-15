@@ -112,10 +112,11 @@ When you already have a `Playlist` that you would like to play, you can use `loa
 ## Control playback
 `AudioburstPlayerCore` exposes a set of simple methods that will let you control playback state:
 
-- `play` - starts playback if a `Playlist` is ready,
-- `pause` - pauses playback,
-- `next` - moves to the next `Burst` when possible.
-- `previous` - moves to the previous `Burst` when possible.
+- `play()` - starts playback if a `Playlist` is ready,
+- `pause()` - pauses playback,
+- `next()` - moves to the next `Burst` when possible.
+- `previous()` - moves to the previous `Burst` when possible.
+- `stop()` - pauses playback and removes AVPlayer and playlist from memory. To restart playback you need to load playlist once again using `load()` method (after stopping, `isLoaded` flag from `PlayerStatus` is set to false)
 
 ## Use `AudioburstPlayerCoreDelegate`
 The `AudioburstPlayerCore` uses delegate to inform about playback status. It is called for example when burst changed or playback time changed.  You need to implement `AudioburstPlayerCoreDelegate` in your app and set delegate during initialization

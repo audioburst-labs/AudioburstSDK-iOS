@@ -40,7 +40,6 @@ class BurstPlayer: BurstPlayerProtocol {
 
     func stop() {
         avPlayer?.pause()
-        //cleanup()
         avPlayer = nil
         playlist = nil
         delegate?.didChangeCurrentBurst()
