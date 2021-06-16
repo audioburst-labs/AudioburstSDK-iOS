@@ -21,7 +21,7 @@ extension BurstPlayer {
     
     var isFullSource: Bool {
         guard let item = avPlayer?.currentItem?.asset as? AVURLAsset, let currentBurst = getCurrentBurst() else { return false }
-        return item.url.absoluteString == currentBurst.audioUrl
+        return item.url == currentBurst.burstSource.audioUrl
     }
     
     var duration: Float {

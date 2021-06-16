@@ -28,6 +28,7 @@ class BurstPlayer: BurstPlayerProtocol {
     
     deinit {
         cleanup()
+        avPlayer = nil
     }
     
     func play() {
@@ -77,7 +78,7 @@ class BurstPlayer: BurstPlayerProtocol {
             play(at: currentIndex)
         } else {
             //load full source
-            guard let url = URL(string: currentBurst.audioUrl) else { return }
+            guard let url = currentBurst.burstSource.audioUrl else { return }
             let item  = AVPlayerItem(url: url)
             avPlayer?.replaceCurrentItem(with: item)
             avPlayer?.seek(to: .zero)
@@ -103,74 +104,94 @@ class BurstPlayer: BurstPlayerProtocol {
     }
     
     func load(_ playlist: Playlist, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
-        cleanup()
-        self.playlist = playlist
-        preparePlayerItem(at: 0) {[weak self] item in
-            guard let item = item else {
+
+        guard !playlist.bursts.isEmpty else {
+            completion(.failure(AudioburstError.contentNotReady))
+            return
+        }
+
+        if let loadedPlaylist = self.playlist,  playlist.id == loadedPlaylist.id {
+            //if loading already loaded playlist update playlist (bursts), but do not reload
+            self.playlist = updatePlaylist(from: playlist, to: loadedPlaylist)
+            guard let playlist = self.playlist else {
                 completion(.failure(AudioburstError.contentNotReady))
                 return
             }
-            self?.avPlayer = AVPlayer(playerItem: item)
-            self?.avPlayer?.automaticallyWaitsToMinimizeStalling  = true
-
-            guard let _ = self?.avPlayer else {
-                self?.playlist = nil
-                completion(.failure(AudioburstError.contentNotReady))
-                return
-            }
-
-            self?.prepareToPlay()
-            self?.delegate?.didUpdatePlaylist()
             completion(.success(playlist))
+        } else {
+            //load new playlist
+            cleanup()
+
+            self.playlist = playlist
+            preparePlayerItem(at: 0) {[weak self] item in
+                guard let item = item else {
+                    completion(.failure(AudioburstError.contentNotReady))
+                    return
+                }
+                self?.avPlayer = AVPlayer(playerItem: item)
+                self?.avPlayer?.automaticallyWaitsToMinimizeStalling  = true
+
+                guard let _ = self?.avPlayer else {
+                    self?.playlist = nil
+                    completion(.failure(AudioburstError.contentNotReady))
+                    return
+                }
+                self?.prepareToPlay()
+                self?.delegate?.didUpdatePlaylist()
+                self?.delegate?.didChangePlaybackTime()
+                completion(.success(playlist))
+            }
         }
     }
-    
-    
-    func preparePlayerItem(at index: Int, completion: @escaping (_ result: AVPlayerItem?) -> Void) {
+
+    private func updatePlaylist(from newPlaylist: Playlist, to loadedPlaylist: Playlist) -> Playlist {
+        guard newPlaylist.id == loadedPlaylist.id else {
+            return loadedPlaylist
+        }
+        return newPlaylist
+    }
+
+    private func preparePlayerItem(at index: Int, completion: @escaping (_ result: AVPlayerItem?) -> Void) {
         var item: AVPlayerItem? = nil
         var url: URL? = nil
         guard let burst = playlist?.bursts[safe: index] else {
             completion(nil)
             return
         }
-        if let streamUrl = burst.streamUrl {
-            url = URL(string: streamUrl)
-        } else {
-            url = URL(string: burst.audioUrl)
-        }
-
+        url = burst.streamUrl != nil ? burst.streamUrl : burst.audioUrl
+        
         guard let regularUrl = url else {
             completion(nil)
             return
         }
 
-        if burst.isAdAvailable {
-            avPlayer?.pause()
-            mobileLibrary.getAdUrl(burst: burst,
-                                   onData: {adUrl in
-                                    debugPrint("Ad url received: \(adUrl)")
-                                    if let adUrl = URL(string: adUrl), !adUrl.isHTTPScheme {
-                                        item = AVPlayerItem(url: adUrl )
-                                    }
-                                    else {
-                                        item = AVPlayerItem(url: regularUrl )
-                                    }
-                                    completion(item)
-                                   },
-                                   onError: { error in
-                                    item = AVPlayerItem(url: regularUrl )
-                                    completion(item)
-                                   })
-        }
-        else {
+//        if burst.isAdAvailable {
+//            avPlayer?.pause()
+//            mobileLibrary.getAdUrl(burst: burst,
+//                                   onData: {adUrl in
+//                                    debugPrint("Ad url received: \(adUrl)")
+//                                    if let adUrl = URL(string: adUrl), !adUrl.isHTTPScheme {
+//                                        item = AVPlayerItem(url: adUrl )
+//                                    }
+//                                    else {
+//                                        item = AVPlayerItem(url: regularUrl )
+//                                    }
+//                                    completion(item)
+//                                   },
+//                                   onError: { error in
+//                                    item = AVPlayerItem(url: regularUrl )
+//                                    completion(item)
+//                                   })
+//        }
+//        else {
             item = AVPlayerItem(url: regularUrl )
             completion(item)
-        }
+      //  }
     }
     
     func getCurrentItemIndex() -> Int? {
         guard let currentItem = avPlayer?.currentItem else {return nil}
-        let currentURLString = (currentItem.asset as? AVURLAsset)?.url.absoluteString
+        let currentURLString = (currentItem.asset as? AVURLAsset)?.url
         return playlist?.bursts.firstIndex(where: {$0.streamUrl == currentURLString  || $0.audioUrl == currentURLString })
     }
     

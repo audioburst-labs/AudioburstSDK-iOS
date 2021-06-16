@@ -64,6 +64,7 @@ public class AudioburstPlayerCore {
     public func getPlaylist(with voiceData: Data, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void)
     {
         audioburstLibrary.getPlaylist(data: voiceData, onData: { playlist in
+            let playlist = Playlist(from: playlist) 
             completion(.success(playlist))
         }, onError: { (error) in
             completion(.failure(AudioburstError(libraryError: error)))
@@ -72,6 +73,7 @@ public class AudioburstPlayerCore {
 
     public func getPlaylist(with playlistInfo: PlaylistInfo, completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {
         audioburstLibrary.getPlaylist(playlistInfo: playlistInfo, onData: { playlist in
+            let playlist = Playlist(from: playlist)
             completion(.success(playlist))
         }, onError: { (error) in
             completion(.failure(AudioburstError(libraryError: error)))
@@ -88,7 +90,14 @@ public class AudioburstPlayerCore {
             })
     }
 
-    //public func getPersonalPlaylist(completion: @escaping (_ result: Swift.Result<Playlist, Error>) -> Void) {}
+    public func getPersonalPlaylist(completion: @escaping (_ result: Swift.Result<PendingPlaylist, Error>) -> Void) {
+        audioburstLibrary.getPersonalPlaylist(onData: { pendingPlaylist in
+           let playlist = PendingPlaylist(from: pendingPlaylist)
+            completion(.success(playlist))
+        }, onError: { error in
+            completion(.failure(AudioburstError(libraryError: error)))
+        })
+    }
 
     public func load(_ playlist: Playlist, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
         player.load(playlist) { result in
@@ -99,6 +108,7 @@ public class AudioburstPlayerCore {
     public func search(_ query: String, completion: @escaping (_ result: Swift.Result<Playlist, AudioburstError>) -> Void) {
         audioburstLibrary.search(query: query,
                                  onData: { playlist in
+                                   let playlist = Playlist(from: playlist)
                                     completion(.success(playlist))
                                  }, onError: { (error) in
                                     completion(.failure(AudioburstError(libraryError: error)))

@@ -16,6 +16,7 @@ public enum AudioburstError: LocalizedError {
     case networkError
     case configurationError
     case noSearchResults
+    case noUserPreferences
     case other(Error?)
 
     public var errorDescription: String? {
@@ -32,6 +33,8 @@ public enum AudioburstError: LocalizedError {
             return "Error in configuration"
         case .noSearchResults:
             return "No search results"
+        case .noUserPreferences:
+            return "No user preferences set"
         case .other:
             return "Player error"
         }
@@ -47,6 +50,8 @@ public enum AudioburstError: LocalizedError {
             self = .contentNotReady
         case .nosearchresults:
             self = .noSearchResults
+        case .nokeysselected:
+            self = .noUserPreferences
         default:
             self = .other(libraryError as? Error)
         }
