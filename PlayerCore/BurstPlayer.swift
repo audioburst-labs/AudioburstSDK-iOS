@@ -165,28 +165,29 @@ class BurstPlayer: BurstPlayerProtocol {
             return
         }
 
-//        if burst.isAdAvailable {
-//            avPlayer?.pause()
-//            mobileLibrary.getAdUrl(burst: burst,
-//                                   onData: {adUrl in
-//                                    debugPrint("Ad url received: \(adUrl)")
-//                                    if let adUrl = URL(string: adUrl), !adUrl.isHTTPScheme {
-//                                        item = AVPlayerItem(url: adUrl )
-//                                    }
-//                                    else {
-//                                        item = AVPlayerItem(url: regularUrl )
-//                                    }
-//                                    completion(item)
-//                                   },
-//                                   onError: { error in
-//                                    item = AVPlayerItem(url: regularUrl )
-//                                    completion(item)
-//                                   })
-//        }
-//        else {
+        if burst.isAdAvailable {
+            avPlayer?.pause()
+            mobileLibrary.getAdUrl(burstId: burst.id,
+                                   onData: {adUrl in
+                                    debugPrint("Ad url received: \(adUrl)")
+                                    if let adUrl = URL(string: adUrl), !adUrl.isHTTPScheme {
+                                        item = AVPlayerItem(url: adUrl )
+                                    }
+                                    else {
+                                        item = AVPlayerItem(url: regularUrl )
+                                    }
+                                    completion(item)
+                                   },
+                                   onError: { error in
+                                    debugPrint("Ad url error")
+                                    item = AVPlayerItem(url: regularUrl )
+                                    completion(item)
+                                   })
+        }
+        else {
             item = AVPlayerItem(url: regularUrl )
             completion(item)
-      //  }
+        }
     }
     
     func getCurrentItemIndex() -> Int? {
