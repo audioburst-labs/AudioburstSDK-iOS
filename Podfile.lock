@@ -1,5 +1,5 @@
 PODS:
-  - AudioburstMobileLibrary (0.0.23)
+  - AudioburstMobileLibrary (0.0.29)
 
 DEPENDENCIES:
   - AudioburstMobileLibrary (~> 0.0.21)
@@ -9,7 +9,7 @@ SPEC REPOS:
     - AudioburstMobileLibrary
 
 SPEC CHECKSUMS:
-  AudioburstMobileLibrary: 5c1f5a47bcc5f9ff0188beb93f62af8f8f5b5d67
+  AudioburstMobileLibrary: 2f566b37fc45e4054406fe1a9db18e5678015270
 
 PODFILE CHECKSUM: 64d9c9431add0db29533661fa91321b922ca0128
 

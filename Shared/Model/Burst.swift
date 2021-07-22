@@ -53,25 +53,6 @@ public struct Burst {
         self.burstSource = BurstSource(from: libraryBurst.source)
         self.isAdAvailable = libraryBurst.isAdAvailable
     }
-
-    //    func convert() -> AudioburstMobileLibrary.Burst {
-    //        return AudioburstMobileLibrary.Burst(id: self.id,
-    //                                             title: self.title,
-    //                                             creationDate: self.creationDate,
-    //                                             duration: Duration(value: self.duration, unit: .seconds),
-    //                                             sourceName: self.sourceName,
-    //                                             category: self.category,
-    //                                             playlistId: self.playlistId,
-    //                                             showName: self.showName,
-    //                                             streamUrl: self.streamUrl?.absoluteString,
-    //                                             audioUrl: self.audioUrl?.absoluteString ?? "",
-    //                                             imageUrls: self.imageUrls,
-    //                                             source: self.burstSource,
-    //                                             shareUrl: self.shareUrl?.absoluteString ?? "",
-    //                                             keywords: self.keywords,
-    //                                             ctaData: self.ctaData,
-    //                                             adUrl: "")
-    //    }
 }
 
 extension Burst {
