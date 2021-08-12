@@ -18,6 +18,8 @@
 		444AC524265525CF005453C5 /* AudioburstError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AC523265525CF005453C5 /* AudioburstError.swift */; };
 		444AC5882657BA9D005453C5 /* BurstPlayer+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AC5872657BA9D005453C5 /* BurstPlayer+Status.swift */; };
 		444AC59F2657D658005453C5 /* TimeToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AC59E2657D658005453C5 /* TimeToString.swift */; };
+		44771D4026C3D1220028DDE1 /* RemoteMediaPlayerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44771D3F26C3D1220028DDE1 /* RemoteMediaPlayerInteractor.swift */; };
+		44771D4226C3D5E00028DDE1 /* BurstPlayer+RemoteMediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44771D4126C3D5E00028DDE1 /* BurstPlayer+RemoteMediaPlayer.swift */; };
 		44899429264E939400746288 /* Collections+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44899428264E939400746288 /* Collections+Safe.swift */; };
 		DFBB8CAA330DEF8B1382116D /* libPods-AudioburstSDK-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED283C8CAD5F5C1582A0D5A2 /* libPods-AudioburstSDK-ios.a */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		444AC523265525CF005453C5 /* AudioburstError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioburstError.swift; sourceTree = "<group>"; };
 		444AC5872657BA9D005453C5 /* BurstPlayer+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BurstPlayer+Status.swift"; sourceTree = "<group>"; };
 		444AC59E2657D658005453C5 /* TimeToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeToString.swift; sourceTree = "<group>"; };
+		44771D3F26C3D1220028DDE1 /* RemoteMediaPlayerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMediaPlayerInteractor.swift; sourceTree = "<group>"; };
+		44771D4126C3D5E00028DDE1 /* BurstPlayer+RemoteMediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BurstPlayer+RemoteMediaPlayer.swift"; sourceTree = "<group>"; };
 		44899428264E939400746288 /* Collections+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+Safe.swift"; sourceTree = "<group>"; };
 		AAB6029FAE738FF322C7B23B /* Pods-AudioburstSDK-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioburstSDK-ios.release.xcconfig"; path = "Target Support Files/Pods-AudioburstSDK-ios/Pods-AudioburstSDK-ios.release.xcconfig"; sourceTree = "<group>"; };
 		BC99C56ED08AC865344ED6E5 /* Pods-AudioburstSDK-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioburstSDK-ios.debug.xcconfig"; path = "Target Support Files/Pods-AudioburstSDK-ios/Pods-AudioburstSDK-ios.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				44020220265285CB00EE8495 /* Protocols.swift */,
 				440202412653C56D00EE8495 /* BurstPlayer.swift */,
 				444AC5872657BA9D005453C5 /* BurstPlayer+Status.swift */,
+				44771D4126C3D5E00028DDE1 /* BurstPlayer+RemoteMediaPlayer.swift */,
+				44771D3F26C3D1220028DDE1 /* RemoteMediaPlayerInteractor.swift */,
 			);
 			path = PlayerCore;
 			sourceTree = "<group>";
@@ -250,6 +256,8 @@
 				4412DD1A26492D2D0013F41D /* AudioburstPlayerCore.swift in Sources */,
 				443492E42679FA0800479CA7 /* Playlist.swift in Sources */,
 				44899429264E939400746288 /* Collections+Safe.swift in Sources */,
+				44771D4226C3D5E00028DDE1 /* BurstPlayer+RemoteMediaPlayer.swift in Sources */,
+				44771D4026C3D1220028DDE1 /* RemoteMediaPlayerInteractor.swift in Sources */,
 				44020221265285CB00EE8495 /* Protocols.swift in Sources */,
 				440202422653C56D00EE8495 /* BurstPlayer.swift in Sources */,
 				444AC524265525CF005453C5 /* AudioburstError.swift in Sources */,

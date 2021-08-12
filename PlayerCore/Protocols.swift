@@ -42,4 +42,5 @@ public protocol BurstPlayerProtocol: AnyObject {
     func seekTo(position: Float)
     func toggleSource()
     func play(at itemIndex: Int)
+    var allowDisplayPlaybackNotification: Bool { get set }
 }

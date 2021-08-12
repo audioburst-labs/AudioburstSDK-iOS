@@ -51,12 +51,12 @@ extension BurstPlayer {
         }
         
         timeControlStatusObservation = avPlayer?.observe(\.timeControlStatus, options: [.new, .initial ]) { [weak self] player, change in
-            self?.delegate?.didChangePlayerStatus()
+            self?.didChangePlayerStatus()
         }
 
         queueStatusObservation = avPlayer?.observe(\.currentItem, options: [.new, .initial]) {
             [weak self] (player, _) in
-            self?.delegate?.didChangeCurrentBurst()
+            self?.didChangeCurrentBurst()
         }
         
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.avPlayer?.currentItem, queue: .main) { [weak self] object in
@@ -89,8 +89,39 @@ extension BurstPlayer {
         let seconds = min(max(0.1, itemDuration / 500.0), 0.5)
         let interval = CMTime(seconds: seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         timeObserverToken = avPlayer?.addPeriodicTimeObserver(forInterval: interval, queue: nil) { [weak self] time in
-            self?.delegate?.didChangePlaybackTime()
+            self?.didChangePlaybackTime()
         }
+    }
+
+    internal func didUpdatePlaylist() {
+
+        delegate?.didUpdatePlaylist()
+    }
+
+    internal func didChangeCurrentBurst() {
+        delegate?.didChangeCurrentBurst()
+
+        guard let currentBurst = getCurrentBurst(),
+        let index = getCurrentItemIndex(),
+        let playlist = playlist else { return }
+        let isFirst = index == 0
+        let isLast = index == (playlist.bursts.capacity - 1)
+
+        remoteMediaPlayerInteractor?.updateTrackInfo(title: currentBurst.title, albumTitle: currentBurst.showName, imageURL: nil, previousTrackAvailable: !isFirst, nextTrackAvailable: !isLast)
+    }
+
+    internal func didChangePlayerStatus() {
+        remoteMediaPlayerInteractor?.updatePlaybackStatus(isPlaying: isPlaying)
+        delegate?.didChangePlayerStatus()
+    }
+
+    internal func didChangePlaybackTime() {
+       remoteMediaPlayerInteractor?.updatePlaybackTimeInfo(elapsed: Double(passedTime), duration: duration)
+        delegate?.didChangePlaybackTime()
+    }
+
+    internal func updateRemoteTrackInfo() {
+
     }
 }
 

@@ -10,20 +10,36 @@ import AVKit
 import AudioburstMobileLibrary
 
 
-class BurstPlayer: BurstPlayerProtocol {
+class BurstPlayer: BurstPlayerProtocol, RemoteMediaPlayerInteractorDelegate {
+   
+
     var avPlayer: AVPlayer?
     var playlist: Playlist?
     var delegate: AudioburstPlayerCoreDelegate?
     let mobileLibrary: AudioburstLibrary
+    var remoteMediaPlayerInteractor: RemoteMediaPlayerInteractor?
     
     //MARK: status
     var timeObserverToken: Any?
     var durationObservation: NSKeyValueObservation?
     var timeControlStatusObservation: NSKeyValueObservation?
     var queueStatusObservation: NSKeyValueObservation?
+
+    var allowDisplayPlaybackNotification: Bool {
+        get {
+            self.allowDisplayPlaybackNotification
+        }
+
+        set {
+            self.remoteMediaPlayerInteractor = RemoteMediaPlayerInteractorImpl(shouldShow: newValue)
+            self.remoteMediaPlayerInteractor?.delegate = self
+        }
+    }
     
     init(mobileLibrary: AudioburstLibrary) {
         self.mobileLibrary = mobileLibrary
+        self.remoteMediaPlayerInteractor = RemoteMediaPlayerInteractorImpl(shouldShow: true)
+        self.remoteMediaPlayerInteractor?.delegate = self
     }
     
     deinit {
@@ -43,10 +59,13 @@ class BurstPlayer: BurstPlayerProtocol {
         avPlayer?.pause()
         avPlayer = nil
         playlist = nil
-        delegate?.didChangeCurrentBurst()
-        delegate?.didChangePlaybackTime()
-        delegate?.didChangePlayerStatus()
-        delegate?.didUpdatePlaylist()
+
+        stopAudioSession()
+
+        didChangeCurrentBurst()
+        didChangePlaybackTime()
+        didChangePlayerStatus()
+        didUpdatePlaylist()
     }
     
     public func previous() {
@@ -110,6 +129,8 @@ class BurstPlayer: BurstPlayerProtocol {
             return
         }
 
+        startAudioSession()
+
         if let loadedPlaylist = self.playlist,  playlist.id == loadedPlaylist.id {
             //if loading already loaded playlist update playlist (bursts), but do not reload
             self.playlist = updatePlaylist(from: playlist, to: loadedPlaylist)
@@ -137,10 +158,32 @@ class BurstPlayer: BurstPlayerProtocol {
                     return
                 }
                 self?.prepareToPlay()
-                self?.delegate?.didUpdatePlaylist()
-                self?.delegate?.didChangePlaybackTime()
+                self?.didUpdatePlaylist()
+                self?.didChangePlaybackTime()
                 completion(.success(playlist))
             }
+        }
+    }
+
+    private func startAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch let error {
+                debugPrint(error.localizedDescription)
+            }
+        } catch let error {
+            debugPrint(error.localizedDescription)
+        }
+
+    }
+
+    private func stopAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch let error {
+            debugPrint(error.localizedDescription)
         }
     }
 
